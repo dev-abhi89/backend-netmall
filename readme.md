@@ -1,10 +1,10 @@
 #API documentation
 documentation further divided into three group 
-- user
+- user 
 - product
 - order
 
-every group has their own apis to perform futher task regarding their own model i.e api regarding user table(model) are comes under user .
+every group has their own apis to perform futher task regarding their own model i.e api related user table(model) must come under the user group.
 
 
 ##  user API Reference
@@ -183,7 +183,9 @@ This endpoint update the product to the database.
 |category|string| (optional): The category of the product.
 |brand|string| (optional): The brand of the product.
 |color|string| (optional): The color of the product._|
+
 this api takes user data by token and check whether the product is blongs to you or not,  if yes then it will do changes as per need, else will throw 403 error
+
 ```json
 POST /products/post-product
 Content-Type: application/json
@@ -211,6 +213,7 @@ This endpoint delete the product to the database.
 | Parameter | Type     | Description                |
 | :-------- | :------- | :------------------------- |
 |_id|string|(required): id of the product|
+
 this api takes user data by token and check whether the product is blongs to you or not,  if yes then it will do changes as per need, else will throw 403 error
 
 ```json
@@ -236,6 +239,7 @@ Authorization: Bearer abcdefghijklmnop
 GET /api/order/get-order
 ```
 this endpint returns the list of orders of the user. (toekn is use to get user details, hence token is required)
+
 ```json
 Content-Type: application/json
 Authorization: Bearer abcdefghijklmnop
@@ -301,6 +305,7 @@ Authorization: Bearer abcdefghijklmnop
 DELETE /api/order/delete-order
 ```
 it use to delete an order in the database. Token required 
+
 | Parameter | Type     | Description                |
 | :-------- | :------- | :------------------------- |
 |_id|string|(required): id of ordert
