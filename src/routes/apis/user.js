@@ -1,6 +1,5 @@
 const jwt = require('jsonwebtoken');
 const verification = require('../../middleware/jwt.auth');
-const key ='1234567'
 const UserModel = require('../../models/user.model');
 
 const router = require('express').Router();
@@ -41,7 +40,7 @@ async function updateUser(req,res){
 }
 } 
 function createToken(obj){
-    const sign = jwt.sign(obj,key);
+    const sign = jwt.sign(obj,process.env.KEY);
     return sign;
 }
 

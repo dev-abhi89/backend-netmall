@@ -18,7 +18,7 @@ function verification(req,res,next){
 }
 
 function tokenValidation(token){
- const result=  jwt.verify(token,key,(err,authData)=>{
+ const result=  jwt.verify(token,process.env.KEY,(err,authData)=>{
         if(err){
             console.log(err);
             return undefined;

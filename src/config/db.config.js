@@ -1,8 +1,11 @@
 const mongoose= require("mongoose");
 
-const url ="mongodb://localhost:27017/Ecommerce";
 
 function connectDB(){
+    const {DATABASE,URL,PORT}= process.env;
+    const url =`${URL}:${PORT}/${DATABASE}`;
+
+    console.log(DATABASE,URL,PORT,"@@@@@@@@@@@@@@@@@");
 mongoose.connect(url,(err)=>{
     if(err){
         console.log("cant connect  : ",err);
