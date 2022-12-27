@@ -1,3 +1,11 @@
+#API documentation
+documentation further divided into three group 
+- user
+- product
+- order
+
+every group has their own apis to perform futher task regarding their own model i.e api regarding user table(model) are comes under user .
+
 
 ##  user API Reference
 
@@ -195,10 +203,117 @@ Authorization: Bearer abcdefghijklmnop
 }
 403 Forebidden
 ```
+```http
+  PUT /api/product/update-product
+```
+This endpoint delete the product to the database.
 
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+|_id|string|(required): id of the product|
+this api takes user data by token and check whether the product is blongs to you or not,  if yes then it will do changes as per need, else will throw 403 error
 
+```json
+POST /products/post-product
+Content-Type: application/json
+Authorization: Bearer abcdefghijklmnop
+//body
 
+{
+  "_id": "bsd23bsad",
+}
+// output
+200 ok
+{
+    "message": "product deleted successfully"
+}
+403 Forbidden
+```
 
+##  order API Reference
 
+```http
+GET /api/order/get-order
+```
+this endpint returns the list of orders of the user. (toekn is use to get user details, hence token is required)
+```json
+Content-Type: application/json
+Authorization: Bearer abcdefghijklmnop
+//output
+[
+    {
+        "_id": "63aac4e1d893d831850710b4",
+        "user": {
+            "_id": "63a9d6c4bbf1505252780bf2",
+            "name": "Abhishek Yadav",
+            "email": "abhishek@gmail.com",
+            "image": "https://i.stack.imgur.com/34AD2.jpg"
+        },
+        "product": {
+            "_id": "63aa7e11f1761be051429762",
+            "name": "iphone 3s",
+            "price": 49999,
+            
+        },
+        "amount": 49999,
+        "address": {
+            "_id": "63aa8d5fe9beaf27634f2e80",
+            "user": "63a9d6c4bbf1505252780bf2",
+            "city": "Gwalior",
+            "state": "Madhya Pradesh",
+            "street": "16,street",
+            "local": " jabcdsd ",
+            "pincode": 123467,
+            "__v": 0
+        },
+        "quantity": 1,
+        "createdAt": "2022-12-27T10:11:45.124Z",
+        "updatedAt": "2022-12-27T10:11:45.124Z",
+        "__v": 0
+    }
+]
+```
+```http
+POST /api/order/add-order
+```
+it use to create an order in the database. Token required 
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+|product|string|(required): id of product
+|amount| integer|(required): price of order
+|quantity|integer|(optional):
+|address | string | (requied): id of address|
 
+```json
+Content-Type: application/json
+Authorization: Bearer abcdefghijklmnop
+//body
 
+{"product":"63aa7e11f1761be051429762",
+"amount":5343123,
+"address":"63aa8d5fe9beaf27634f2e80"}
+//output
+200 ok
+403 forbidden
+```
+
+```http
+DELETE /api/order/delete-order
+```
+it use to delete an order in the database. Token required 
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+|_id|string|(required): id of ordert
+
+```json
+Content-Type: application/json
+Authorization: Bearer abcdefghijklmnop
+//body
+
+{
+"_id":"63aa7e11f1761be051429762",
+}
+//output
+200 ok
+403 forbidden
+```
