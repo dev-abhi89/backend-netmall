@@ -2,11 +2,8 @@ const mongoose= require("mongoose");
 
 
 function connectDB(){
-    const {DATABASE,URL,PORT}= process.env;
-    const url =`${URL}:${PORT}/${DATABASE}`;
-
-    console.log(DATABASE,URL,PORT,"@@@@@@@@@@@@@@@@@");
-mongoose.connect(url,(err)=>{
+    const {URL}= process.env;
+mongoose.connect(URL,(err)=>{
     if(err){
         console.log("cant connect  : ",err);
     }else{
