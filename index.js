@@ -8,8 +8,7 @@ app.use(express.urlencoded({extended:false}));
 useAPI(app);
 connectDB();
 
-const server = app.listen(3000,()=>{
-    const port = server.address().port;
-    const address =server.address().address;
-    console.log("server is listening on:",address,port);
+app.listen(3001,()=>{
+
+    console.log("server is listening on:",3001);
 });
