@@ -4,11 +4,12 @@ const UserModel = require('../../models/user.model');
 
 const router = require('express').Router();
 
-
+//
 router.get('/',getData);
 router.post('/create-user',createUser);
-router.get('/get-user',verification,getUser)
+router.get('/get-user',getUser)
 router.put('/update-user',verification,updateUser);
+
 
 async function getData(req,res){
     const users=await UserModel.find();
@@ -27,7 +28,7 @@ async function createUser(req,res){
     }
 }
 async function getUser(req,res){
-    const user =await UserModel.findById(req.userData._id);
+    const user =await UserModel.findById(req.body.user||'63abe245b1324bfa61b06f70');
     res.json(user);
 }
 async function updateUser(req,res){

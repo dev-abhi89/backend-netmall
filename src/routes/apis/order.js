@@ -5,8 +5,8 @@ const ProductModel = require('../../models/product.model');
 const router = require('express').Router();
 
 router.get('/',testAPI);
-router.post('/add-order',verification,addOrder);
-router.get('/get-order',verification,getOrder);
+router.post('/add-order',addOrder);
+router.get('/get-order',getOrder);
 router.delete('/delete-order',verification,deleteOrder);
 
 
@@ -17,13 +17,13 @@ function testAPI(req,res){
 
 
 async function getOrder(req,res){
-    const q =await OrderModel.find({user:req.userData._id}).populate('user','name email image').populate('address').populate('product');
+    const q =await OrderModel.find({user:req.body.user||'63abe245b1324bfa61b06f70'}).populate('user','name email image').populate('address').populate('product');
     res.json(q);
 
 }
 async function addOrder(req,res){
 
-   try{ const q =OrderModel({...req.body,user:req.userData._id});
+   try{ const q =OrderModel({...req.body,user:req.body.user ||'63abe245b1324bfa61b06f70'});
    const product =await ProductModel.findById(req.body.product);
    if(product.quantity<=0){
     return res.sendStatus(400).json({message:"out of stock"});

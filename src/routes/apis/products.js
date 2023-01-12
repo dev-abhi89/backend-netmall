@@ -4,8 +4,8 @@ const ProductModel = require('../../models/product.model');
 const router = require('express').Router();
 
 router.get('/',getProduct);
-router.get('/get-product',verification,getAllProduct);
-router.post('/add-product',verification,addProduct);
+router.get('/get-product',getAllProduct);
+router.post('/add-product',addProduct);
 router.put('/update-product',verification,updateProduct);
 router.delete('/delete-product',verification,deleteProduct);
 
@@ -21,7 +21,7 @@ async function getAllProduct(req,res){
 }
 async function addProduct(req,res){
     try{
-    const q = ProductModel({...req.body,seller:req.userData._id});
+    const q = ProductModel({...req.body,seller:req.body.seller ||'63abe245b1324bfa61b06f70'});
     await q.save();
     res.json(q);
 }
@@ -30,6 +30,8 @@ async function addProduct(req,res){
         res.SendStatus(400);
     }
 }
+var aas ={"name":"abhishek","gender":"male",Number:123123};
+
 async function updateProduct(req,res){
     try{
    var q= await ProductModel.findOne({_id:req.body._id,seller:req.userData._id},req.body);
